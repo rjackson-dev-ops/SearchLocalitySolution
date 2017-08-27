@@ -5,7 +5,7 @@ describe 'Search Locality' do
   let(:directory_to_search) {""}
   let(:first_term) {"developer"}
   let(:second_term) {"operations"}
-  let(:number_words_between) {9}
+  let(:number_words_between) {0}
   let(:string_match) {""}
   let(:localitySearch) {LocalitySearch.new(first_term, second_term, number_words_between, string_match)}
   let(:non_match_string) {"A tale of non-matched strings for testing."}
@@ -53,8 +53,6 @@ describe 'Search Locality' do
       expect(match_list_size).to eq(1)
     end
   end
-
-
 
 
 end
