@@ -16,7 +16,7 @@ describe 'Search Locality' do
     expect{localitySearch.get_files(directory_to_search)}.to raise_error('Directory invalid')
   end
 
-  it 'should return an empty list if the directory is empty' do
+  it 'should return an empty list if the directory does not contain txt files' do
     directory_to_search = '../data/empty_directory'
     file_list = localitySearch.get_files(directory_to_search)
     expect(file_list).to be_empty
@@ -39,7 +39,7 @@ describe 'Search Locality' do
   context 'Non matching string' do
     let(:string_match) {non_match_string}
 
-    it 'should return an empty list if string to be matched does not contain a match' do
+    it 'should return an empty list if string to be matched does not contain the terms' do
       match_list  = localitySearch.find_matching_strings()
       expect(match_list).to be_empty
     end
@@ -47,10 +47,24 @@ describe 'Search Locality' do
 
   context 'Matching string' do
     let(:string_match) {match_string}
-    it 'should return a list with one entry if the match string contains one match' do
+    let(:number_words_between) {9}
+
+    it 'should return a list with one entry if the match string contains one match with words in the search distance' do
       match_list  = localitySearch.find_matching_strings()
       match_list_size = match_list.size
       expect(match_list_size).to eq(1)
+    end
+
+
+
+    context "Matching words too far apart" do
+      let(:string_match) {match_string}
+      let(:number_words_between) {5}
+
+      it 'should return a empty list if the matching terms are too far apart' do
+        match_list  = localitySearch.find_matching_strings()
+        expect(match_list).to be_empty()
+      end
     end
   end
 
