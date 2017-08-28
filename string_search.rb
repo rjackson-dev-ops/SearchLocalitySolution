@@ -1,6 +1,6 @@
 module StringSearch
-  def find_matching_strings(first_term, second_term, number_words_between)
-    words = @match_string.split(/\W+/)
+  def find_matching_terms(first_term, second_term, number_words_between, match_string)
+    words = match_string.split(/\W+/)
 
     match_list = []
 
