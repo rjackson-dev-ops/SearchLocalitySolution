@@ -40,7 +40,7 @@ describe 'Search Locality' do
     let(:string_match) {non_match_string}
 
     it 'should return an empty list if string to be matched does not contain the terms' do
-      match_list  = localitySearch.find_matching_strings()
+      match_list  = localitySearch.find_matching_strings(@first_term, @second_term, @number_words_between)
       expect(match_list).to be_empty
     end
   end
@@ -50,7 +50,7 @@ describe 'Search Locality' do
     let(:number_words_between) {9}
 
     it 'should return a list with one entry if the match string contains one match with words in the search distance' do
-      match_list  = localitySearch.find_matching_strings()
+      match_list  = localitySearch.find_matching_strings(@first_term, @second_term, @number_words_between)
       match_list_size = match_list.size
       expect(match_list_size).to eq(1)
     end
@@ -62,7 +62,7 @@ describe 'Search Locality' do
       let(:number_words_between) {5}
 
       it 'should return a empty list if the matching terms are too far apart' do
-        match_list  = localitySearch.find_matching_strings()
+        match_list  = localitySearch.find_matching_strings(@first_term, @second_term, @number_words_between)
         expect(match_list).to be_empty()
       end
     end
